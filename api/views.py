@@ -42,6 +42,7 @@ def get_playlist(request, city):
                 )
 
             # Tenta a requisição novamente com o novo token
+            # Esse codigo existe por conta do tempo que um token do spotify fica valido
             spotify_response = requests.get(
                 f"https://api.spotify.com/v1/browse/categories/{genre}/playlists",
                 headers={"Authorization": f"Bearer {spotify_token}"},
