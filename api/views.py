@@ -2,8 +2,8 @@ import requests
 import dotenv
 import os
 from django.http import JsonResponse
-from .services.weather_service import get_temperature
-from .services.spotify_service import get_spotify_token
+from services.weather_service import get_temperature
+from services.spotify_service import get_spotify_token
 
 # Utilizando Dotenv para manipular dados sensíveis
 dotenv.load_dotenv(dotenv.find_dotenv())

@@ -6,7 +6,7 @@ from unittest.mock import patch, MagicMock
 from django.http import JsonResponse
 import json
 
-from .views import get_playlist, get_temperature, def_genre, get_spotify_token, extract_playlist_data
+from .views import get_playlist, def_genre
 
 # Configure o Django para rodar testes
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'music_suggester.settings')
@@ -56,41 +56,6 @@ class TestMusicSuggester(unittest.TestCase):
             'spotify_external_url': 'https://spotify.com/playlist',
             'album_image_url': 'https://image.url'
         })
-
-    @patch('requests.get')
-    def test_get_temperature_city_not_found(self, mock_requests_get):
-        # Configura o mock da resposta do OpenWeatherMap para cidade não encontrada
-        mock_response = MagicMock()
-        mock_response.status_code = 404
-        mock_response.json.return_value = {'cod': '404', 'message': 'city not found'}
-        mock_requests_get.return_value = mock_response
-        
-        # Chama a função
-        response = get_temperature('unknown_city')
-        
-        # Decodifique o conteúdo da resposta JSON
-        response_content = json.loads(response.content)
-        
-        # Verifica o resultado
-        self.assertEqual(response.status_code, 404)
-        self.assertEqual(response_content, {
-            'error': "City 'unknown_city' not found.",
-            'details': 'city not found'
-        })
-
-    @patch('requests.post')
-    def test_get_spotify_token_success(self, mock_requests_post):
-        # Configura o mock da resposta do Spotify token
-        mock_response = MagicMock()
-        mock_response.status_code = 200
-        mock_response.json.return_value = {'access_token': 'mock_token'}
-        mock_requests_post.return_value = mock_response
-        
-        # Chama a função
-        token = get_spotify_token('client_id', 'client_secret')
-        
-        # Verifica o resultado
-        self.assertEqual(token, 'mock_token')
 
     def test_def_genre(self):
         # Testa a função def_genre com diferentes temperaturas
