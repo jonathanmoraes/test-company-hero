@@ -2,6 +2,8 @@ import requests
 import dotenv
 import os
 from django.http import JsonResponse
+from .services.weather_service import get_temperature
+from .services.spotify_service import get_spotify_token
 
 # Utilizando Dotenv para manipular dados sensíveis
 dotenv.load_dotenv(dotenv.find_dotenv())
@@ -49,8 +51,8 @@ def get_playlist(request, city):
             )
             spotify_response.raise_for_status()
         return extract_playlist_data(spotify_response.json())
-    
-    #tratamento de possiveis exceções 
+
+    # tratamento de possiveis exceções
     except requests.exceptions.RequestException as e:
         return JsonResponse(
             {"error": "Failed to retrieve playlist from Spotify", "details": str(e)},
@@ -70,39 +72,6 @@ def get_playlist(request, city):
         )
 
 
-def get_temperature(city):
-    # Tenta obter a temperatura da cidade
-    openweathermap_app_id = os.getenv("openweathermap_app_id")
-    try:
-        weather_response = requests.get(
-            f"http://api.openweathermap.org/data/2.5/weather?q={city}&limit=1&appid={openweathermap_app_id}&units=metric"
-        )
-        weather_data = weather_response.json()
-
-        # Verifica se a cidade não foi encontrada
-        if weather_data.get("cod") == "404":
-            return JsonResponse(
-                {
-                    "error": f"City '{city}' not found.",
-                    "details": weather_data.get("message"),
-                },
-                status=404,
-            )
-
-        # Se a cidade for encontrada, retorna a temperatura
-        temperature = weather_data["main"]["temp"]
-        return temperature
-    
-    except requests.exceptions.RequestException as e:
-        return JsonResponse(
-            {
-                "error": f"Failed to retrieve temperature for {city} from OpenWeatherMap.",
-                "details": str(e),
-            },
-            status=500,
-        )
-
-
 def def_genre(temperature):
     # Define o genero da musica de acordo com a temperatura
     if temperature > 25:
@@ -112,29 +81,6 @@ def def_genre(temperature):
     else:
         genre = "classical"
     return genre
-
-
-def get_spotify_token(client_id, client_secret):
-    # Faz uma requisição para gerar um token do spotify
-    global spotify_token
-    try:
-        response = requests.post(
-            "https://accounts.spotify.com/api/token",
-            headers={"Content-Type": "application/x-www-form-urlencoded"},
-            data={
-                "grant_type": "client_credentials",
-                "client_id": client_id,
-                "client_secret": client_secret,
-            },
-        )
-        response.raise_for_status()
-        token_info = response.json()
-        spotify_token = token_info["access_token"]  # Salva o token na variável global
-        return spotify_token
-    except requests.exceptions.RequestException as e:
-        return JsonResponse(
-            {"error": "Failed to retrieve Spotify token", "details": f"{e}"}, status=500
-        )
 
 
 def extract_playlist_data(spotify_data):
