@@ -4,13 +4,15 @@ import os
 from django.http import JsonResponse
 from services.weather_service import get_temperature
 from services.spotify_service import get_spotify_token
+from rest_framework.decorators import api_view
 
 # Utilizando Dotenv para manipular dados sensíveis
 dotenv.load_dotenv(dotenv.find_dotenv())
+
 # Variavel global para salvar o token do spotify
 spotify_token = None
 
-
+@api_view(['GET'])
 def get_playlist(request, city):
     global spotify_token
     client_id = os.getenv("spotify_client_id")
