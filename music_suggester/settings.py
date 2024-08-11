@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework_swagger",
     "rest_framework",
-    'drf_yasg',
+    "drf_yasg",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "music_suggester.urls"
@@ -100,6 +102,12 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'https://test-company-hero.onrender.com',
+    'http://test-company-hero.onrender.com',
+    'http://localhost:8000',
 ]
 
 
