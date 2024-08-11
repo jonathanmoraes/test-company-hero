@@ -5,6 +5,10 @@ from django.http import JsonResponse
 from services.weather_service import get_temperature
 from services.spotify_service import get_spotify_token
 from rest_framework.decorators import api_view
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Hello, this is the home page!")
 
 # Utilizando Dotenv para manipular dados sensíveis
 dotenv.load_dotenv(dotenv.find_dotenv())
