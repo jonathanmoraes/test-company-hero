@@ -105,9 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://test-company-hero.onrender.com',
-    'http://test-company-hero.onrender.com',
-    'http://localhost:8000',
+    "*"
 ]
 
 
