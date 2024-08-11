@@ -106,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ALLOWED_ORIGINS = [
     'https://test-company-hero.onrender.com',
-    'https://test-company-hero.onrender.com/swagger-ui/',
+    'http://test-company-hero.onrender.com',
     'http://localhost:8000',
 
 ]
