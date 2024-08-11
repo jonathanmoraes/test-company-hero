@@ -16,6 +16,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    path(''),
     path('swagger-ui/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('playlist/<str:city>/', get_playlist, name='get_playlist'),
 ]
