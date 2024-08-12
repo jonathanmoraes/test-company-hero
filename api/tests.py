@@ -1,9 +1,9 @@
 import unittest
 import os
 import django
-import requests
 from unittest.mock import patch, MagicMock
 from django.http import JsonResponse
+from django.test import RequestFactory
 import json
 
 from .views import get_playlist, def_genre
@@ -13,6 +13,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'music_suggester.settings')
 django.setup()
 
 class TestMusicSuggester(unittest.TestCase):
+
+    def setUp(self):
+        self.factory = RequestFactory()
 
     @patch('api.views.get_temperature')
     @patch('api.views.get_spotify_token')
@@ -39,8 +42,8 @@ class TestMusicSuggester(unittest.TestCase):
         }
         mock_requests_get.return_value = mock_response
         
-        # Cria uma requisição mock
-        request = MagicMock()
+        # Cria uma requisição real usando RequestFactory
+        request = self.factory.get('/playlist/city_name/')
         
         # Chama a função
         response = get_playlist(request, 'city_name')

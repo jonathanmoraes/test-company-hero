@@ -1,5 +1,3 @@
-# test-company-hero
-Test for the development of a music suggestion api based on the temperature of a city
 
 # Music Suggester
 
@@ -20,20 +18,17 @@ Music Suggester é uma aplicação Django que sugere playlists do Spotify com ba
 
   **1. Clone o repositório:**
 
-    ```bash
     git clone https://github.com/yourusername/music-suggester.git
     cd music-suggester
 
   **2. Crie um ambiente virtual e ative-o:**
 
-    ```bash
     Copiar código
     python -m venv venv
     source venv/bin/activate  # Para Windows use: venv\Scripts\activate
 
   **3. Instale as dependências:**
 
-    ```bash
     Copiar código
     pip install -r requirements.txt
 
@@ -51,13 +46,11 @@ Music Suggester é uma aplicação Django que sugere playlists do Spotify com ba
 
 **1. Execute as migrações:**
 
-    ```bash
     Copiar código
     python manage.py migrate
 
 **2. Inicie o servidor Django:**
 
-    ```bash
     Copiar código
     python manage.py runserver
     A aplicação estará disponível em http://localhost:8000/.
@@ -65,11 +58,18 @@ Music Suggester é uma aplicação Django que sugere playlists do Spotify com ba
 ## Testes
 Para rodar os testes, certifique-se de que as variáveis de ambiente estão configuradas corretamente e então execute:
 
-    ```bash
-    Copiar código
-    python -m unittest discover -s api/tests
+    Roda os testes do service spotify_service.py:
+    'python -m unittest .\tests\spotify_service_tests.py'
+
+    Roda os testes do service weather_service.py:
+    'python -m unittest .\tests\weather_service_tests.py'
+    
+    Roda os testes do view pricipal que faz o tratamento dos dados da requisição 
+    pricipal do music_suggester:
+    'python manage.py test'
+
     
 Estrutura do Código
 
-    views.py: Contém as funções principais para obter playlists, temperatura, determinar gênero musical e gerar tokens do Spotify.
+    views.py: Contém as funções principais para obter playlists.
     tests.py: Contém testes unitários para garantir o correto funcionamento das funções.

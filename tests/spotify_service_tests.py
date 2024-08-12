@@ -6,7 +6,7 @@ from unittest.mock import patch, MagicMock
 from django.http import JsonResponse
 from services.spotify_service import get_spotify_token
 
-# Configure o Django para rodar testes
+# Configura o Django para rodar testes
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'music_suggester.settings')
 django.setup()
 

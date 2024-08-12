@@ -72,6 +72,32 @@ TEMPLATES = [
     },
 ]
 
+# Configurações do Django REST Framework
+REST_FRAMEWORK = {
+    # Configurações de autenticação
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    # Configurações de permissão
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    # Paginação padrão
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    # Renderizadores de resposta
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    # Filtros
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.OrderingFilter',
+        'rest_framework.filters.SearchFilter',
+    ),
+}
+
 WSGI_APPLICATION = "music_suggester.wsgi.application"
 
 
@@ -108,7 +134,6 @@ CORS_ALLOWED_ORIGINS = [
     'https://test-company-hero.onrender.com',
     'http://test-company-hero.onrender.com',
     'http://localhost:8000',
-
 ]
 
 
