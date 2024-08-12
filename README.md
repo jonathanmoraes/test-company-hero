@@ -48,13 +48,18 @@ Music Suggester é uma aplicação Django que sugere playlists do Spotify com ba
 * Services: estão localizadas as views de cada service externo utlizado no projeto no caso Spotify e OpenWeatherMap.
 * Tests: Onde estão localizados os testes de cada service separados.
 ## Executar o Projeto
+**1. Crie o arquivo dotenv **
+  variáveis necessarias
+    spotify_client_id = "your spotify_client_id" 
+    spotify_client_secret = "your spotify_client_secret"
+    openweathermap_app_id = "your openweathermap_app_id"
 
-**1. Execute as migrações:**
+**2. Execute as migrações:**
 
     Copiar código
     python manage.py migrate
 
-**2. Inicie o servidor Django:**
+**3. Inicie o servidor Django:**
 
     Copiar código
     python manage.py runserver
