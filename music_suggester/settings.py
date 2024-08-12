@@ -11,21 +11,24 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+CLIENT_ID = os.getenv("spotify_client_id")
+CLIENT_SECRET = os.getenv("spotify_client_secret")
+OPENWEATHERMAP_APP_ID = os.getenv("openweathermap_app_id")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-)fnvl!7s(4m@$x8rm*dbcw_953bqkelk&hsky52&op6@btq8yl"
+SECRET_KEY = os.getenv("django_secret_key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['test-company-hero.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://test-company-hero.onrender.com','http://test-company-hero.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition

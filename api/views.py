@@ -19,11 +19,8 @@ spotify_token = None
 @api_view(['GET'])
 def get_playlist(request, city):
     global spotify_token
-    client_id = os.getenv("spotify_client_id")
-    client_secret = os.getenv("spotify_client_secret")
-
     if spotify_token is None:
-        spotify_token = get_spotify_token(client_id, client_secret)
+        spotify_token = get_spotify_token()
         if spotify_token is None:
             return JsonResponse({"error": "Failed to obtain Spotify token"}, status=500)
 

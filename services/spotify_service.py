@@ -1,9 +1,10 @@
 import requests
 import os
 from django.http import JsonResponse
+from music_suggester.settings import CLIENT_ID, CLIENT_SECRET
 
 
-def get_spotify_token(client_id, client_secret):
+def get_spotify_token():
     # Faz uma requisição para gerar um token do spotify
     global spotify_token
     try:
@@ -12,8 +13,8 @@ def get_spotify_token(client_id, client_secret):
             headers={"Content-Type": "application/x-www-form-urlencoded"},
             data={
                 "grant_type": "client_credentials",
-                "client_id": client_id,
-                "client_secret": client_secret,
+                "client_id": CLIENT_ID,
+                "client_secret": CLIENT_SECRET,
             },
         )
         response.raise_for_status()
