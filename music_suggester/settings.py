@@ -23,18 +23,14 @@ OPENWEATHERMAP_APP_ID = os.getenv("openweathermap_app_id")
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("django_secret_key")
+SECRET_KEY = "django-insecure-)fnvl!7s(4m@$x8rm*dbcw_953bqkelk&hsky52&op6@btq8yl"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['test-company-hero.onrender.com', 'localhost', '127.0.0.1']
 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",  # Exemplo de origem local
-    "http://test-company-hero.onrender.com",  # Adicione seu domínio específico
-]
 # Application definition
 
 INSTALLED_APPS = [
@@ -81,7 +77,28 @@ TEMPLATES = [
 
 # Configurações do Django REST Framework
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    # Configurações de autenticação
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    # Configurações de permissão
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    # Paginação padrão
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    # Renderizadores de resposta
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    # Filtros
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.OrderingFilter',
+        'rest_framework.filters.SearchFilter',
+    ),
 }
 
 WSGI_APPLICATION = "music_suggester.wsgi.application"
