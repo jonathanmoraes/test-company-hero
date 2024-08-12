@@ -40,7 +40,7 @@ def get_playlist(request, city):
 
         # Verifica se o token é inválido
         if spotify_response.status_code == 401:  # Token inválido
-            spotify_token = get_spotify_token(client_id, client_secret)
+            spotify_token = get_spotify_token()
             if spotify_token is None:
                 return JsonResponse(
                     {"error": "Failed to obtain Spotify token"}, status=500

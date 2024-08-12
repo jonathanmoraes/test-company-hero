@@ -18,5 +18,6 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('', home, name='home'),
     path('swagger-ui/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('playlist/<str:city>/', get_playlist, name='get_playlist'),
 ]
